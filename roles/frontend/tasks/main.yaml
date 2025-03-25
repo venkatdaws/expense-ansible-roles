@@ -13,15 +13,13 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: app-pre-req
-
-# if there is change in configuration only, then you need to restart nginx
+# If there is a change in configuration only,then you need to restart nginx
 - name: copy backend conf
   ansible.builtin.template:
     src: expense.conf.j2
     dest: /etc/nginx/default.d/expense.conf
   notify:
   - restart nginx
-
 # - name: restart nginx
 #   ansible.builtin.service:
 #     name: nginx

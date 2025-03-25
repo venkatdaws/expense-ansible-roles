@@ -15,7 +15,6 @@
 - name: create expense user
   ansible.builtin.user:
     name: expense
-
 - name: run app pre-requisites
   tags:
   - deployment
@@ -29,7 +28,6 @@
   ansible.builtin.command: npm install
   args:
     chdir: /app
-
 - name: copy backend service
   ansible.builtin.template:
     src: backend.service.j2
@@ -44,7 +42,7 @@
 
 - name: import data into mysql
   community.mysql.mysql_db:
-    login_user: "{{ login_user }}"
+    login_user: "{{login_user}}"
     login_password: "{{ login_password }}"
     login_host: "{{ login_host }}"
     target: /app/schema/backend.sql
@@ -56,7 +54,7 @@
     daemon_reload: true
 
 - name: start and enable backend service
-  tags: 
+  tags:
   - deployment
   ansible.builtin.service:
     name: backend
